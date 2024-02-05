@@ -4,46 +4,59 @@ import 'package:snack_n_app/components/button.dart';
 import 'package:snack_n_app/components/text_field.dart';
 import 'package:snack_n_app/helper/helper_functions.dart';
 
-class LoginPage extends StatefulWidget {
-  final void Function()? onTap;  // toggle to sign up page
-  const LoginPage({super.key, required this.onTap});
+class RegisterPage extends StatefulWidget {
+  final void Function()? onTap; // toggle to sign in page
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   // text editing controllers
+  final TextEditingController usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
-  // sign in user from firebase
-  void loginUser() async {
-    // display loading circle
+  void registerUser() async {
+    // show loading circle
     showDialog(
-      context: context, 
+      context: context,
       builder: (context) => const Center(
         child: CircularProgressIndicator(),
       ),
     );
 
-    // sign user in
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text, 
-        password: passwordController.text
-      );
-
+    // match password is correct
+    if (passwordController.text != confirmPasswordController.text){
       // pop loading circle
-      if (context.mounted) Navigator.pop(context);
-    }
-    // display errors
-    on FirebaseAuthException catch (e) {
       Navigator.pop(context);
-      displayErrorToUser(e.code, context);
+
+      // show error message to user
+      displayErrorToUser("Passwords don't match!", context);
+    }
+
+    else {
+      // create the user 
+      try {
+        UserCredential? userCredential = 
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text);
+        // pop loading circle
+        Navigator.pop(context);
+
+      } on FirebaseAuthException catch (e) {
+        // pop loading circle
+        Navigator.pop(context);
+
+        // display error message
+        displayErrorToUser(e.code, context);
+      }
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,24 +69,31 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // 1. Logo
+                  // Logo
                   Icon(
-                    Icons.person,
-                    size: 80,
-                    color: Theme.of(context).colorScheme.inversePrimary,
+                    Icons.lock,
+                    size: 100,
                   ),
                   
-                  const SizedBox(height: 25),
-
-                  // 2. Welcome back message
+                  // Welcome back message
                   Text(
                     "welcome",
                   ),
+
+                  // spacer
+                  SizedBox(height: 25),
+
+                  // username textfield
+                  MyTextField(
+                    controller: usernameController, 
+                    hintText: "Username",
+                    obscureText: false,
+                  ),
                 
                   // spacer
-                  const SizedBox(height: 25),
+                  SizedBox(height: 10),
 
-                  // 3. email textfield
+                  // email textfield
                   MyTextField(
                     controller: emailController, 
                     hintText: "Email",
@@ -82,55 +102,47 @@ class _LoginPageState extends State<LoginPage> {
 
                   const SizedBox(height: 10),
 
-                  // 4. password textfield
+                  // password textfield
                   MyTextField(
                     controller: passwordController,
                     hintText: 'Password',
                     obscureText: true,
                   ),
 
-                  const SizedBox(height: 10),
-
-                  // 5. forgot password
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        "Forgot Password?",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                        )
-                      )
-                    ]
+                  // confirm password textfield
+                  MyTextField(
+                    controller: confirmPasswordController,
+                    hintText: 'Confirm Pasword',
+                    obscureText: true,
                   ),
 
                   const SizedBox(height: 10),
 
-                  // 6. sign in button
+                  // sign in button
                   MyButton(
-                    onTap: loginUser, 
-                    text: 'Sign In',
+                    onTap: registerUser, 
+                    text: 'Sign Up',
                   ),
 
                   const SizedBox(height: 10),
 
-                  // 7. register page
+                  // register page
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Not a member?",
+                        "Already have an account?",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.inversePrimary,
+                          color:Theme.of(context).colorScheme.inversePrimary,
                         )
                       ),
 
                       const SizedBox(width: 4),
 
                       GestureDetector(
-                        onTap: widget.onTap, 
+                        onTap: widget.onTap,
                         child: const Text(
-                          "Register now", 
+                          "Login now", 
                            style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.blue,      
@@ -142,6 +154,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
+  
         ),
       ),
     );

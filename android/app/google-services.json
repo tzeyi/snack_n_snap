@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "112575088036",
+    "project_id": "snack-n-snap",
+    "storage_bucket": "snack-n-snap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112575088036:android:a0f3c6e0d7c81ced346d31",
+        "android_client_info": {
+          "package_name": "com.example.snack_n_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk-NcWt35jUOkp5MbWpT0RhuvegMtr5gI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
