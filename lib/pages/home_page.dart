@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:snack_n_app/components/my_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,24 +9,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // sign out user
-  void logOut() {
-    FirebaseAuth.instance.signOut();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Snack n Snap"),
-        actions: [
-          // log out button
-          IconButton(
-            onPressed: logOut,
-            icon: Icon(Icons.logout)
-          ),
-        ]
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        elevation: 0,
         ),
+        drawer: MyDrawer(),
     );
   }
 }
