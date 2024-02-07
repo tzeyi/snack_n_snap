@@ -5,8 +5,8 @@ class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
   // sign out user
-  void logOut() {
-    FirebaseAuth.instance.signOut();
+  void logOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:snack_n_app/components/my_back_button.dart';
 import 'package:snack_n_app/components/my_drawer.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -45,12 +46,56 @@ class ProfilePage extends StatelessWidget {
                 // extract data
                 Map<String, dynamic>? user = snapshot.data!.data();
 
-                return Column(
-                  children: [
-                    Text(user!['email']),
-                    Text(user['username']),
-                  ],
+                return Center(
+                  child: Column(
+                    children: [
+                      // back button
+                      const Padding(
+                        padding: EdgeInsets.only(
+                          top: 25.0,
+                          left: 25,
+                        ),
+                        child: Row(
+                          children: [
+                            MyBackButton(),
+                          ],
+                        ),
+                      ),
+
+                      
+                      const SizedBox(height: 25),
+
+                      // profile pic
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          borderRadius: BorderRadius.circular(24)
+                        ),
+                        padding: const EdgeInsets.all(25),
+                        child: const Icon(
+                          Icons.person,
+                          size: 64,  
+                        ),
+                      ),
+                      
+                      Text(
+                        user!['username'],
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                      Text(
+                        user['email'],
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
                 );
+
               } else {
                 return Text("No Data");
               }

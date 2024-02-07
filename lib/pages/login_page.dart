@@ -68,6 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                   // 2. Welcome back message
                   Text(
                     "welcome",
+                    style: TextStyle(fontSize: 20),
                   ),
                 
                   // spacer
