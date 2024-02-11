@@ -4,4 +4,4 @@ This is a social media app for food bloggers to showcase their pictures. This is
 
 You can add images and there is an explore feature that helps you find popular cafe spots on the map.
 
-![UI Showcase](readme-ui.png)
+![UI Showcase](/assets/images/readme-ui.png)
