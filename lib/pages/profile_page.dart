@@ -8,7 +8,7 @@ class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
 
   // current logged in user
-  User? currentUser = FirebaseAuth.instance.currentUser;
+  final User? currentUser = FirebaseAuth.instance.currentUser;
 
   // future to fetch user details
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
@@ -62,7 +62,6 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
 
-                      
                       const SizedBox(height: 25),
 
                       // profile pic

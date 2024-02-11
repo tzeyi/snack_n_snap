@@ -1,6 +1,6 @@
 /*
 
-Databse stores posts that users have published in the app
+Database stores posts that users have published in the app
 It is stored in a collection called 'Posts' in Firebase
 
 Each post contains;

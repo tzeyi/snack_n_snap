@@ -82,7 +82,28 @@ class MyDrawer extends StatelessWidget {
                   }
                 ),
               ),
+              
+              // Staggered tile
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.account_tree,
+                    color: Theme.of(context).colorScheme.inversePrimary,  
+                  ),
+                  title: Text("U I"),
+                  onTap: () {
+                    // pop drawer
+                    Navigator.pop(context);
+
+                    // navigate to users page
+                    Navigator.pushNamed(context, '/staggered_page');
+                  }
+                ),
+              ),
+
             ],
+
           ),
 
           // logout tile

@@ -20,6 +20,19 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
+    // create a user document and add to firestore
+  Future<void> createUserDocument(UserCredential? userCredential) async {
+    if (userCredential != null && userCredential.user != null){
+      await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(userCredential.user!.email)
+        .set({
+          'email': userCredential.user!.email,
+          'username': usernameController.text,
+      });
+    }
+  }
+  
   void registerUser() async {
     // show loading circle
     showDialog(
@@ -59,19 +72,6 @@ class _RegisterPageState extends State<RegisterPage> {
         // display error message
         displayErrorToUser(e.code, context);
       }
-    }
-  }
-
-  // create a user document and add to firestore
-  Future<void> createUserDocument(UserCredential? userCredential) async {
-    if (userCredential != null && userCredential.user != null){
-      await FirebaseFirestore.instance
-        .collection("Users")
-        .doc(userCredential.user!.email)
-        .set({
-          'email': userCredential.user!.email,
-          'username': usernameController.text,
-      });
     }
   }
 

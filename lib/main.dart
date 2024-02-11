@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:snack_n_app/auth/login_or_register.dart';
 import 'package:snack_n_app/pages/home_page.dart';
 import 'package:snack_n_app/pages/profile_page.dart';
+import 'package:snack_n_app/pages/staggered_page.dart';
 import 'package:snack_n_app/pages/users_page.dart';
 import 'package:snack_n_app/theme/dark_mode.dart';
 import 'package:snack_n_app/theme/light_mode.dart';
@@ -28,14 +29,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Snack n Snap',
       debugShowCheckedModeBanner: false,
-      home: const AuthPage(),
+      home: AuthPage(),
       theme: lightMode,
       darkTheme: darkMode,
       routes: {
-        '/login_register_page': (context) => const LoginOrRegister(),
+        '/login_register_page': (context) => LoginOrRegister(),
         '/home_page': (context) => HomePage(),
         '/profile_page': (context) => ProfilePage(),
-        '/users_page': (context) => const UsersPage(),
+        '/users_page': (context) => UsersPage(),
+        '/staggered_page': (context) => StaggeredPage(),
       }
     );
   }
