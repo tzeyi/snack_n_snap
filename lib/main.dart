@@ -3,8 +3,9 @@ import 'package:snack_n_app/auth/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:snack_n_app/auth/login_or_register.dart';
 import 'package:snack_n_app/pages/home_page.dart';
+import 'package:snack_n_app/pages/post_page.dart';
 import 'package:snack_n_app/pages/profile_page.dart';
-import 'package:snack_n_app/pages/staggered_page.dart';
+import 'package:snack_n_app/pages/tabs_page.dart';
 import 'package:snack_n_app/pages/users_page.dart';
 import 'package:snack_n_app/theme/dark_mode.dart';
 import 'package:snack_n_app/theme/light_mode.dart';
@@ -35,9 +36,10 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login_register_page': (context) => LoginOrRegister(),
         '/home_page': (context) => HomePage(),
+        '/post_page': (context) => PostPage(),
         '/profile_page': (context) => ProfilePage(),
         '/users_page': (context) => UsersPage(),
-        '/staggered_page': (context) => StaggeredPage(),
+        '/staggered_page': (context) => TabsPage(),
       }
     );
   }

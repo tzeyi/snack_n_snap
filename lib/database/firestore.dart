@@ -21,7 +21,7 @@ class FirestoreDatabase {
   final CollectionReference posts = 
     FirebaseFirestore.instance.collection('Posts');
 
-  // post a message
+  // CREATE
   Future<void> addPost(String message) {
     return posts.add({
       'UserEmail': user!.email,
@@ -30,7 +30,7 @@ class FirestoreDatabase {
     });
   }
 
-  // read posts from database
+  // READ
   Stream<QuerySnapshot> getPostsStream() {
     final postsStream = FirebaseFirestore.instance
       .collection('Posts')
@@ -39,5 +39,6 @@ class FirestoreDatabase {
 
     return postsStream;
   }
+
 
 }

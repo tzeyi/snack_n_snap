@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:snack_n_app/components/bottom_nav_bar.dart';
+import 'package:snack_n_app/pages/post_page.dart';
 import 'package:snack_n_app/pages/tab_views/feed_view.dart';
 
-class StaggeredPage extends StatefulWidget {
-  const StaggeredPage({super.key});
+class TabsPage extends StatefulWidget {
+  const TabsPage({super.key});
 
   @override
-  State<StaggeredPage> createState() => _StaggeredPageState();
+  State<TabsPage> createState() => _StaggeredPageState();
 }
 
 
-class _StaggeredPageState extends State<StaggeredPage> {
+class _StaggeredPageState extends State<TabsPage> {
   // CUSTOM tabs
   final List<Widget> myTabs = const [
       // feed tab
@@ -45,17 +46,9 @@ class _StaggeredPageState extends State<StaggeredPage> {
   @override
   Widget build(BuildContext context) {
 
-    // index used to keep track of bottom nav bar
-    int selectedIndex = 0;
-
-
     return DefaultTabController(
       length: 3, 
       child: Scaffold(
-        bottomNavigationBar: MyBottomNavBar(
-          onTabChange: (index) => navigateBottomBar(index),
-        ),
-        appBar: AppBar(),
         body: ListView(
           children: [
               // tab bar
