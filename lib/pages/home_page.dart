@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:snack_n_app/components/my_drawer.dart';
-import 'package:snack_n_app/components/my_list_tile.dart';
-import 'package:snack_n_app/components/my_post_button.dart';
+import 'package:snack_n_app/components/drawer.dart';
+import 'package:snack_n_app/components/list_tile.dart';
+import 'package:snack_n_app/components/post_button.dart';
 import 'package:snack_n_app/components/text_field.dart';
 import 'package:snack_n_app/database/firestore.dart';
 

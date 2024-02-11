@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:snack_n_app/components/my_back_button.dart';
-import 'package:snack_n_app/components/my_list_tile.dart';
+import 'package:snack_n_app/components/back_button.dart';
+import 'package:snack_n_app/components/list_tile.dart';
 import 'package:snack_n_app/helper/helper_functions.dart';
 
 class UsersPage extends StatelessWidget {
