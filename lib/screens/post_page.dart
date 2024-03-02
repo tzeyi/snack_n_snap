@@ -4,7 +4,7 @@ import 'package:snack_n_app/components/drawer.dart';
 import 'package:snack_n_app/components/list_tile.dart';
 import 'package:snack_n_app/components/post_button.dart';
 import 'package:snack_n_app/components/text_field.dart';
-import 'package:snack_n_app/database/firestore.dart';
+import 'package:snack_n_app/data/firebase_service/firestore.dart';
 
 class PostPage extends StatelessWidget {
   PostPage({super.key});

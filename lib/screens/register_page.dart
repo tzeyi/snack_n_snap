@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snack_n_app/components/button.dart';
 import 'package:snack_n_app/components/text_field.dart';
+import 'package:snack_n_app/data/firebase_service/firebase_auth.dart';
 import 'package:snack_n_app/helper/helper_functions.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -15,7 +18,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   // text editing controllers
-  final TextEditingController usernameController = TextEditingController();
+  final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -33,54 +36,19 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
   
-  void registerUser() async {
-    // show loading circle
-    showDialog(
-      context: context,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-
-    // match password is correct
-    if (passwordController.text != confirmPasswordController.text){
-      // pop loading circle
-      Navigator.pop(context);
-
-      // show error message to user
-      displayErrorToUser("Passwords don't match!", context);
-    }
-
-    else {
-      // create the user 
-      try {
-        UserCredential? userCredential = 
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.text,
-            password: passwordController.text);
-
-        // create a user document and add to firestore
-        createUserDocument(userCredential);
-
-        // pop loading circle
-        Navigator.pop(context);
-
-      } on FirebaseAuthException catch (e) {
-        // pop loading circle
-        Navigator.pop(context);
-
-        // display error message
-        displayErrorToUser(e.code, context);
-      }
-    }
-  }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      body: SafeArea(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/cafe2.jpg"),
+            fit: BoxFit.cover,
+          )
+        ),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -91,11 +59,16 @@ class _RegisterPageState extends State<RegisterPage> {
                   Icon(
                     Icons.lock,
                     size: 100,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                   
                   // Welcome back message
                   Text(
                     "welcome",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    )
                   ),
 
                   // spacer
@@ -127,6 +100,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     obscureText: true,
                   ),
 
+                  const SizedBox(height: 10),
+
                   // confirm password textfield
                   MyTextField(
                     controller: confirmPasswordController,
@@ -138,7 +113,19 @@ class _RegisterPageState extends State<RegisterPage> {
 
                   // sign in button
                   MyButton(
-                    onTap: registerUser, 
+                    onTap: () async {
+                      try {
+                        await Authentication().registerUser(
+                          email: emailController.text, 
+                          password: passwordController.text, 
+                          confirmPassword: confirmPasswordController.text,
+                          username: usernameController.text,
+                          profile: File(''),
+                        );
+                      } on Exception catch(e) {
+                        displayErrorToUser(e.toString(), context);
+                      }
+                    },
                     text: 'Sign Up',
                   ),
 

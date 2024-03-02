@@ -12,16 +12,16 @@ class MyListTile extends StatelessWidget {
       padding: const EdgeInsets.only(left: 25, right: 10, bottom: 10),
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).colorScheme.inversePrimary,
           borderRadius: BorderRadius.circular(12),
         ),
         child: ListTile(
           title: Text(title),
           subtitle: Text(
             subtitle,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.secondary,
-            ),
+            // style: TextStyle(
+            //   color: Theme.of(context).colorScheme.secondary,
+            // ),
           ),
         ),
       ),

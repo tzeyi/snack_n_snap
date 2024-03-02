@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:snack_n_app/components/bottom_nav_bar.dart';
-import 'package:snack_n_app/pages/post_page.dart';
-import 'package:snack_n_app/pages/profile_page.dart';
-import 'package:snack_n_app/pages/tabs_page.dart';
+import 'package:snack_n_app/screens/post_page.dart';
+import 'package:snack_n_app/screens/profile_page.dart';
+import 'package:snack_n_app/screens/tabs_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

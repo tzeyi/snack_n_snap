@@ -10,8 +10,8 @@ class MyBottomNavBar extends StatelessWidget {
     return Container(
       child: GNav(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        color: Theme.of(context).colorScheme.inversePrimary,
-        activeColor: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.primary,
+        activeColor: Theme.of(context).colorScheme.inversePrimary,
         tabActiveBorder: Border.all(color: Theme.of(context).colorScheme.background),
         tabBackgroundColor: Theme.of(context).colorScheme.primary,
         onTabChange: (value) => onTabChange!(value),
