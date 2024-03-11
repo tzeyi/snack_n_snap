@@ -19,29 +19,17 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  // sign in user from firebase
   void loginUser() async {
-    // display loading circle
-    showDialog(
-      context: context, 
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-
-    // sign user in
-    try {
-      await Authentication()
-        .login(email: emailController.text, password: passwordController.text);
-
-      if (context.mounted) Navigator.pop(context);
+      // create the user 
+      try {
+          await Authentication().signIn(
+            email: emailController.text,
+            password: passwordController.text,
+          );
+      } on FirebaseAuthException catch (e) {
+        displayErrorToUser(e.code, context);
+      }
     }
-    // display errors
-    on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
-      displayErrorToUser(e.code, context);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

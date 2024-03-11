@@ -63,44 +63,6 @@ class MyDrawer extends StatelessWidget {
                   }
                 ),
               ),
-              
-              // users tile
-              Padding(
-                padding: const EdgeInsets.only(left: 25.0),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.group,
-                    color: Theme.of(context).colorScheme.inversePrimary,  
-                  ),
-                  title: Text("U S E R S"),
-                  onTap: () {
-                    // pop drawer
-                    Navigator.pop(context);
-
-                    // navigate to users page
-                    Navigator.pushNamed(context, '/users_page');
-                  }
-                ),
-              ),
-              
-              // Staggered tile
-              Padding(
-                padding: const EdgeInsets.only(left: 25.0),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.account_tree,
-                    color: Theme.of(context).colorScheme.inversePrimary,  
-                  ),
-                  title: Text("U I"),
-                  onTap: () {
-                    // pop drawer
-                    Navigator.pop(context);
-
-                    // navigate to users page
-                    Navigator.pushNamed(context, '/staggered_page');
-                  }
-                ),
-              ),
 
             ],
 

@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:snack_n_app/helper/helper_functions.dart';
 import 'package:snack_n_app/services/database/firestore.dart';
 import 'package:snack_n_app/services/model/imageModel.dart';
 
 
 class Authentication {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  Future<UserCredential?> login({required String email, required String password}) async {
+  Future<UserCredential?> signIn({required String email, required String password}) async {
       return await _auth.signInWithEmailAndPassword(
           email: email.trim(), 
           password: password.trim()
@@ -28,7 +30,6 @@ class Authentication {
         password: password.trim(),
       );
 
-      print(profilePic);
       // upload profile pic on storage
       if (profilePic.path.isEmpty) {
         URL = '';
@@ -37,7 +38,7 @@ class Authentication {
       }
 
       // create user information in cloud firestore
-      await FirestoreDatabase().CreateUser(
+      await FirestoreDatabase().createUser(
         email: email, 
         username: username, 
         profilePic: URL == ''? 
